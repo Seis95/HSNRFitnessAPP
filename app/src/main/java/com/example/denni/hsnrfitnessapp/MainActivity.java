@@ -25,7 +25,10 @@ public class MainActivity extends AppCompatActivity {
 
         Datum.setText(mydate);
         Plan.setFocusable(false);
-        Plan.setText("Kein Training für Heute geplant");//Github test
+        Plan.setText("Kein Training für Heute geplant");
+    }
+    public void githubtest(){
+        //unnötig nur für test
     }
 
 }
