@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/background"
+    tools:context="com.example.denni.hsnrfitnessapp.MainActivity">
+
+    <TextView
+        android:text="27.01.2017"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:id="@+id/textView7"
+        android:textSize="44sp"
+        android:textColor="@android:color/white"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textStyle="normal|bold" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:id="@+id/button17"
+        android:layout_height="20dp"
+        android:layout_alignTop="@+id/editText2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="111dp"
+        android:background="#ffff"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:inputType="textPersonName"
+        android:text="Kein Training Heute geplant "
+        android:ems="10"
+        android:id="@+id/editText2"
+        android:layout_marginTop="16dp"
+        android:textSize="24sp"
+        android:textColor="@android:color/white"
+        android:textAlignment="center"
+        android:gravity="top|center_horizontal"
+        android:background="@null"
+        android:layout_height="130dp"
+        android:layout_below="@+id/textView7"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="25dp"
+        android:layout_below="@+id/button17"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <ImageButton
+            android:layout_width="109dp"
+            android:layout_height="109dp"
+            app:srcCompat="@drawable/ausdauer"
+            android:id="@+id/imageButton"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:padding="3dp"
+            android:scaleType="fitCenter"
+            android:background="@null"
+            android:alpha="1"
+            style="@android:style/Widget.Holo.Light.ImageButton" />
+
+        <ImageButton
+            android:layout_width="109dp"
+            android:layout_height="109dp"
+            app:srcCompat="@drawable/geraete"
+            android:id="@+id/imageButton3"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:padding="3dp"
+            android:scaleType="fitCenter"
+            android:background="@null"
+            android:alpha="1"
+            style="@android:style/Widget.Holo.Light.ImageButton" />
+
+        <ImageButton
+            android:layout_width="109dp"
+            android:layout_height="109dp"
+            app:srcCompat="@drawable/uebungen"
+            android:id="@+id/imageButton4"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:padding="3dp"
+            android:scaleType="fitCenter"
+            android:background="@null"
+            android:alpha="1"
+            style="@android:style/Widget.Holo.Light.ImageButton" />
+
+    </LinearLayout>
+
+    <ImageButton
+        app:srcCompat="@drawable/kalender"
+        android:id="@+id/imageButton2"
+        android:layout_height="109dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_width="220dp"
+        android:adjustViewBounds="true"
+        android:padding="3dp"
+        android:scaleType="fitCenter"
+        android:background="@null"
+        android:alpha="1"
+        style="@android:style/Widget.Holo.Light.ImageButton"/>
+
+</RelativeLayout>
