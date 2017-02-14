@@ -26,16 +26,16 @@ public class Datenbank extends SQLiteOpenHelper {
     }
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_CONTACTS_TABLE = "CREATE TABLE " + Fitness + "("
-        + ID + " INTEGER PRIMARY KEY," + Date + " TEXT,"
-        + Ausdauer + " INTEGER" + Geräte + " INTEGER," + Übungen + " INTEGER,"+  ")";
-        db.execSQL(CREATE_CONTACTS_TABLE);
+      //  String CREATE_CONTACTS_TABLE = "CREATE TABLE " + Fitness + "("
+       // + ID + " INTEGER PRIMARY KEY," + Date + " TEXT,"
+       // + Ausdauer + " INTEGER" + Geräte + " INTEGER," + Übungen + " INTEGER,"+  ")";
+        //db.execSQL(CREATE_CONTACTS_TABLE);
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 // Drop older table if existed
-        db.execSQL("DROP TABLE IF EXISTS " + Fitness);
+      //  db.execSQL("DROP TABLE IF EXISTS " + Fitness);
 // Creating tables again
-        onCreate(db);
+     //   onCreate(db);
     }
 }
