@@ -88,9 +88,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void addcoloum(String datum){
 
         SQLiteDatabase db = this.getReadableDatabase();
-        db.execSQL("ALTER TABLE IF NOT EXISTS "+TABLE_1+" ADD '"+datum+"' TEXT;");
-        db.execSQL("ALTER TABLE IF NOT EXISTS "+TABLE_2+" ADD '"+datum+"' TEXT;");
-        db.execSQL("ALTER TABLE IF NOT EXISTS "+TABLE_3+" ADD '"+datum+"' TEXT;");
+        db.execSQL("ALTER TABLE "+TABLE_1+" ADD '"+datum+"' TEXT;");
+        db.execSQL("ALTER TABLE "+TABLE_2+" ADD '"+datum+"' TEXT;");
+        db.execSQL("ALTER TABLE "+TABLE_3+" ADD '"+datum+"' TEXT;");
     }
     public String get(String datum,int i){
         String Table = "";
