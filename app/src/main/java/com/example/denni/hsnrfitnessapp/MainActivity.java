@@ -35,13 +35,10 @@ public class MainActivity extends AppCompatActivity {
         d.reset();
         d.addcoloum(mydate);
         d.add("Übungen",mydate,"Laufen",10);
-        d.get(mydate);
+        d.get(mydate,3);
     }
 
-    public void createdatabse(){
 
-
-    }
 
 
 }
