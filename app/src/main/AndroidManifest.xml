@@ -18,7 +18,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".Eintrag" />
-        <activity android:name=".Add"></activity>
+        <activity android:name=".Add" />
+        <activity android:name=".Kalender"></activity>
     </application>
 
 </manifest>

@@ -14,6 +14,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -88,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         // ausgewählt wurde und geben eine Meldung aus
         int id = item.getItemId();
         if (id == R.id.Informationen) {
-            Toast.makeText(getApplicationContext(), "Code und Design: Dennis Maus | Dokumentation: Tanja Schneider", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Code und Design: Dennis Maus   Dokumentation: Tanja Schneider", Toast.LENGTH_LONG).show();
 
             return true;
         }
@@ -237,6 +238,11 @@ public class MainActivity extends AppCompatActivity {
         Bundle extras = new Bundle();
         extras.putInt("liste",3);
         in.putExtras(extras);
+        startActivity(in);
+    }
+    public void kalender(View v){
+        Intent in = new Intent(MainActivity.this, Kalender.class);
+
         startActivity(in);
     }
 }

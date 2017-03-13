@@ -115,6 +115,7 @@
         android:scaleType="fitCenter"
         android:background="@null"
         android:alpha="1"
-        style="@android:style/Widget.Holo.Light.ImageButton"/>
+        style="@android:style/Widget.Holo.Light.ImageButton"
+        android:onClick="kalender" />
 
 </RelativeLayout>

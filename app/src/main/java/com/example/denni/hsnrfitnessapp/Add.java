@@ -36,7 +36,7 @@ public class Add extends AppCompatActivity {
 public void save(View v){
     String name = edit.getText().toString();
 if(radioa.isChecked()){
-    Toast.makeText(getApplicationContext(), name+ " wurde Hinzugefügt", Toast.LENGTH_LONG).show();
+    Toast.makeText(getApplicationContext(), name+ " wird Hinzugefügt", Toast.LENGTH_SHORT).show();
     try {
         addTextToFile(1,name);
     } catch (IOException e) {
@@ -44,7 +44,7 @@ if(radioa.isChecked()){
     }
     }
     if(radiog.isChecked()){
-        Toast.makeText(getApplicationContext(), name+ " wurde Hinzugefügt", Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), name+ " wird Hinzugefügt", Toast.LENGTH_SHORT).show();
         try {
             addTextToFile(2,name);
         } catch (IOException e) {
@@ -52,7 +52,7 @@ if(radioa.isChecked()){
         }
     }
     if(radioü.isChecked()){
-        Toast.makeText(getApplicationContext(), name+ " wurde Hinzugefügt", Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), name+ " wird Hinzugefügt", Toast.LENGTH_SHORT).show();
         try {
             addTextToFile(3,name);
         } catch (IOException e) {
