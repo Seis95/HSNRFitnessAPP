@@ -11,9 +11,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -38,7 +40,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
+
         EditText Plan = (EditText)this.findViewById(R.id.editText2);
         TextView Datum = (TextView)this.findViewById(R.id.textView7);
         mydate = java.text.DateFormat.getDateInstance().format(Calendar.getInstance().getTime());
@@ -67,6 +71,35 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         System.out.println("Ergebnis: "+readTextfile(1,1));
+    }
+
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu); //your file name
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Wir prüfen, ob Menü-Element mit der ID "action_daten_aktualisieren"
+        // ausgewählt wurde und geben eine Meldung aus
+        int id = item.getItemId();
+        if (id == R.id.Informationen) {
+            Toast.makeText(getApplicationContext(), "Code und Design: Dennis Maus | Dokumentation: Tanja Schneider", Toast.LENGTH_LONG).show();
+
+            return true;
+        }
+        if (id == R.id.Hinzufügen) {
+            Intent in = new Intent(MainActivity.this, Add.class);
+
+            startActivity(in);
+
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void addTextToFile(int i,String text) throws IOException {
