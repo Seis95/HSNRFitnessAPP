@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -46,17 +47,42 @@ public class Kalender extends AppCompatActivity {
         radio6 = (RadioButton)this.findViewById(R.id.radio6);
         radio7 = (RadioButton)this.findViewById(R.id.radio7);
 
-        list2 = (ListView)this.findViewById(R.id.list2);
-        list3 = (ListView)this.findViewById(R.id.list3);
+        final RadioGroup radioGroup = (RadioGroup) findViewById(R.id.rgroup);
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+                int id=checkedId;
+                if (id==2131427429){
+                    readTextfile(4,2);
+                }
+                if (id==2131427430){
+                    readTextfile(5,2);
+                }
+                if (id==2131427431){
+                    readTextfile(6,2);
+                }
+                if (id==2131427432){
+                    readTextfile(7,2);
+                }
+                if (id==2131427433){
+                    readTextfile(8,2);
+                }
+                if (id==2131427434){
+                    readTextfile(9,2);
+                }
+                if (id==2131427435){
+                    readTextfile(10,2);
+                }
+                arrayAdapter2.notifyDataSetChanged();
+            }
+        });
+
+        list2 = (ListView)this.findViewById(R.id.list2);//auswahl
+        list3 = (ListView)this.findViewById(R.id.list3);//ausgewählt
         Array2 = new ArrayList<String>();
-        Array3 = new ArrayList<String>();
-        Array3.add("Montag");
-        Array3.add("Dienstag");
-        Array3.add("Mitwoch");
-        Array3.add("Donnerstag");
-        Array3.add("Freitag");
-        Array3.add("Samstag");
-        Array3.add("Sonntag");
+
         list2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> myAdapter, View myView, int myItemInt, long mylng) {
                 String selectedFromList =(String) (list2.getItemAtPosition(myItemInt));
@@ -64,10 +90,18 @@ public class Kalender extends AppCompatActivity {
                 arrayAdapter2.notifyDataSetChanged();
             }
         });
+        list3.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> myAdapter, View myView, int myItemInt, long mylng) {
+                String selectedFromList =(String) (list3.getItemAtPosition(myItemInt));
+                Array2.remove(selectedFromList);
+                arrayAdapter2.notifyDataSetChanged();
+            }
+        });
         Array1 = new ArrayList<String>();
-        readTextfile(1);
-        readTextfile(2);
-        readTextfile(3);
+        readTextfile(1,1);
+        readTextfile(2,1);
+        readTextfile(3,1);
+
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>
                 (this, android.R.layout.simple_list_item_1, Array1);
         list2.setAdapter(arrayAdapter);
@@ -78,7 +112,7 @@ public class Kalender extends AppCompatActivity {
 
 
     }
-    public void readTextfile(int i){
+    public void readTextfile(int i,int array){
         File logFile;
         String file ="";
         String ergebnis ="Kein Ergebnis";
@@ -90,6 +124,27 @@ public class Kalender extends AppCompatActivity {
         }
         if (i ==3){
             file = "Übungen.txt";
+        }
+        if (i ==4){
+            file = "Montag.txt";
+        }
+        if (i ==5){
+            file = "Dienstag.txt";
+        }
+        if (i ==6){
+            file = "Mittwoch.txt";
+        }
+        if (i ==7){
+            file = "Donnerstag.txt";
+        }
+        if (i ==8){
+            file = "Freitag.txt";
+        }
+        if (i ==9){
+            file = "Samstag.txt";
+        }
+        if (i ==10){
+            file = "Sonntag.txt";
         }
         BufferedReader buf = null;
         logFile = new File(Environment.getExternalStorageDirectory()+"/Download/",file);
@@ -107,7 +162,12 @@ public class Kalender extends AppCompatActivity {
             while (x!=null){
                 Log.d("SOMETHING","Durchlauft Schleife");
                 Log.d("SOMETHING",x);
-                Array1.add(x);
+                if(array ==1) {
+                    Array1.add(x);
+                }
+                if(array ==2) {
+                    Array2.add(x);
+                }
                 x = r.readLine();
             }
             r.close();
@@ -151,6 +211,9 @@ public class Kalender extends AppCompatActivity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }else{
+            logFile.delete();
+            logFile.createNewFile();
         }
         //testet ob schon vorhanden
         BufferedReader r=null;
@@ -215,7 +278,9 @@ public class Kalender extends AppCompatActivity {
         while (list3.getCount()>0){
             try {
             addTextToFile(wert,Array2.get(i).toString());
-            i++;}
+            i++;
+                Log.d("SOMETHING","aktuell:"+i++ +"noch: "+ list3.getCount());
+            }
             catch (Exception e){
 
             }
