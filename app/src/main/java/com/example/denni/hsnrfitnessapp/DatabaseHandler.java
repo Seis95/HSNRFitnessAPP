@@ -138,17 +138,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return cursor.getCount();
     }
     public void updateA(String Name, int Wert){
-        String selectQuery = "UPDATE Data" +
-                " SET Aktuellerwert = "+Wert +
-                " WHERE Name = '"+Name+"'";
-        SQLiteDatabase db  = this.getReadableDatabase();
-        Cursor cursor      = db.rawQuery(selectQuery, null);
+        SQLiteDatabase db = this.getReadableDatabase();
+        ContentValues args = new ContentValues();
+        args.put("Aktuellerwert", Wert);
+        db.update("Data", args, "Name" + "= '" + Name+"'", null);
     }
     public void updateH(String Name, int Wert){
-        String selectQuery = "UPDATE Data" +
-                " SET Höchstwert = "+Wert +
-                " WHERE Name = '"+Name+"'";
-        SQLiteDatabase db  = this.getReadableDatabase();
-        Cursor cursor      = db.rawQuery(selectQuery, null);
+        SQLiteDatabase db = this.getReadableDatabase();
+        ContentValues args = new ContentValues();
+        args.put("Höchstwert", Wert);
+        db.update("Data", args, "Name" + "= '" + Name+"'", null);
     }
 }

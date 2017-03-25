@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements Adapter.listener 
     String Path="";
     RecyclerView rv;
     ArrayList Array1;
-    List<FitnessElemente> fitnessElemente;
+    List<FitnessElemente> fitnessElementes;
     private Adapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,14 +72,15 @@ public class MainActivity extends AppCompatActivity implements Adapter.listener 
         rv.setLayoutManager(layoutManager);
         Array1 = new ArrayList<String>();
         getDay();
-        fitnessElemente = new ArrayList();
+        fitnessElementes = new ArrayList();
         DatabaseHandler d = new DatabaseHandler(this);
         for (int i = 0; Array1.size() >i; i++){
+            Log.d("TEST",Array1.get(i).toString());
             addtoList(Array1.get(i).toString(), d.getAWert(Array1.get(i).toString()),d.getHWert(Array1.get(i).toString()));
 
     }
 
-        setadapter(fitnessElemente);
+        setadapter(fitnessElementes);
     }
     private void setadapter(List<FitnessElemente> fitnessElementes) {
         adapter = new Adapter(fitnessElementes, this);
@@ -91,15 +92,13 @@ public class MainActivity extends AppCompatActivity implements Adapter.listener 
 
         {
             FitnessElemente fitnessElemente = new FitnessElemente();
-            //fitnessElemente.setObjectId(12);
             fitnessElemente.setName(Name);
             fitnessElemente.setAktuellerwert(Wert1);
             fitnessElemente.setHöchstwert(Wert2);
-            this.fitnessElemente.add(fitnessElemente);
+            this.fitnessElementes.add(fitnessElemente);
         }
-        //Weiß nicht welche Daten in der Detailansicht benötigt werden
 
-        return fitnessElemente;
+        return fitnessElementes;
     }
 
     @Override
