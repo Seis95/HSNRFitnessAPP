@@ -8,37 +8,42 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/background"
     tools:context="com.example.denni.hsnrfitnessapp.Kalender">
 
     <TextView
-        android:text="Auswahl"
+        android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView3"
-        android:textSize="40sp"
         android:layout_above="@+id/Speichern"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="23dp" />
+        android:layout_marginBottom="23dp"
+        android:text="Auswahl"
+        android:textColor="@android:color/white"
+        android:textSize="40sp" />
 
     <Button
-        android:text="Speichern"
+        android:id="@+id/Speichern"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:id="@+id/Speichern"
-        android:onClick="speichern" />
+        android:onClick="speichern"
+        android:text="Speichern"
+        android:background="@drawable/background"
+        android:textColor="@android:color/white" />
 
     <TextView
-        android:text="Gewählt"
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView2"
-        android:textSize="40sp"
-        android:layout_below="@+id/list3"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_below="@+id/list3"
+        android:text="Gewählt"
+        android:textColor="@android:color/white"
+        android:textSize="40sp" />
 
     <ListView
         android:id="@+id/list2"
@@ -46,7 +51,8 @@
         android:layout_height="300dp"
         android:layout_above="@+id/textView3"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:background="@android:color/white" />
 
     <ListView
         android:id="@+id/list3"
@@ -54,7 +60,8 @@
         android:layout_height="300dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/list2" />
+        android:layout_alignTop="@+id/list2"
+        android:background="@android:color/white" />
 
     <RadioGroup
         android:orientation='horizontal'
@@ -66,54 +73,61 @@
         android:id="@+id/rgroup">
 
         <RadioButton
-            android:text="Mo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/radio1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:checked="true" />
+            android:checked="true"
+            android:text="Mo"
+            android:textColor="@android:color/white" />
 
         <RadioButton
-            android:text="Di"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/radio2"
-            android:layout_weight="1" />
-
-        <RadioButton
-            android:text="Mi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Di"
+            android:textColor="@android:color/white" />
+
+        <RadioButton
             android:id="@+id/radio3"
-            android:layout_weight="1" />
-
-        <RadioButton
-            android:text="Do"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Mi"
+            android:textColor="@android:color/white" />
+
+        <RadioButton
             android:id="@+id/radio4"
-            android:layout_weight="1" />
-
-        <RadioButton
-            android:text="Fr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Do"
+            android:textColor="@android:color/white" />
+
+        <RadioButton
             android:id="@+id/radio5"
-            android:layout_weight="1" />
-
-        <RadioButton
-            android:text="Sa"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Fr"
+            android:textColor="@android:color/white" />
+
+        <RadioButton
             android:id="@+id/radio6"
-            android:layout_weight="1" />
-
-        <RadioButton
-            android:text="So"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Sa"
+            android:textColor="@android:color/white" />
+
+        <RadioButton
             android:id="@+id/radio7"
-            android:layout_weight="1" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="So"
+            android:textColor="@android:color/white" />
     </RadioGroup>
 
 </RelativeLayout>

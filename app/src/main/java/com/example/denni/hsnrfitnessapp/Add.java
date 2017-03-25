@@ -23,6 +23,7 @@ public class Add extends AppCompatActivity {
     RadioButton radioü;
     RadioButton radiog;
     EditText edit;
+    String Path="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +32,8 @@ public class Add extends AppCompatActivity {
         radiog = (RadioButton)this.findViewById(R.id.radioG);
         radioü = (RadioButton)this.findViewById(R.id.radioÜ);
         edit = (EditText)this.findViewById(R.id.editText3);
-
+        File myDir = getFilesDir();
+        Path =myDir.toString();
     }
 public void save(View v){
     String name = edit.getText().toString();
@@ -75,8 +77,8 @@ if(radioa.isChecked()){
         if (i ==3){
             file = "Übungen.txt";
         }
-        Log.d("SOMETHING","KA: "+ Environment.getExternalStorageState());
-        logFile = new File(Environment.getExternalStorageDirectory()+"/Download/",file);
+        Log.d("SOMETHING","KA: "+ Path);
+        logFile = new File(Path,file);
         if (!logFile.exists()) {
             try {
                 Log.d("SOMETHING","File exisitert nicht");

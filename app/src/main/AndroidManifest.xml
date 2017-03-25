@@ -19,7 +19,8 @@
         </activity>
         <activity android:name=".Eintrag" />
         <activity android:name=".Add" />
-        <activity android:name=".Kalender"></activity>
+        <activity android:name=".Kalender" />
+        <activity android:name=".Statistik"></activity>
     </application>
 
 </manifest>

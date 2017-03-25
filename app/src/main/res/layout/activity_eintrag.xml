@@ -12,32 +12,39 @@
     tools:context="com.example.denni.hsnrfitnessapp.Eintrag">
 
     <ListView
+        android:id="@+id/listview1"
         android:layout_width="match_parent"
-        android:layout_alignParentTop="true"
+        android:layout_height="340dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_height="340dp"
-        android:textColor="#FFFFFF"
-        android:id="@+id/listview1"
-        android:headerDividersEnabled="false" />
+        android:layout_alignParentTop="true"
+        android:background="@android:color/white"
+        android:choiceMode="singleChoice"
+        android:headerDividersEnabled="false"
+        android:listSelector="@android:color/darker_gray"
+        android:textColor="#FFFFFF" />
 
     <EditText
+        android:id="@+id/editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="number"
-        android:ems="10"
-        android:id="@+id/editText"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="67dp"
-        android:hint="Wert eingeben" />
+        android:ems="10"
+        android:hint="Wert eingeben"
+        android:inputType="number"
+        android:textColor="@android:color/white" />
 
     <Button
-        android:text="Speichern"
+        android:id="@+id/Speichern"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/editText"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="73dp"
-        android:id="@+id/Speichern" />
+        android:background="@drawable/background"
+        android:onClick="save"
+        android:text="Speichern"
+        android:textColor="@android:color/white" />
 </RelativeLayout>

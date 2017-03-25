@@ -33,7 +33,7 @@ public class Kalender extends AppCompatActivity {
     ListView list3;
     ArrayList Array1;
     ArrayList Array2;
-    ArrayList Array3;
+    String Path="";
     ArrayAdapter<String> arrayAdapter2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,33 +46,38 @@ public class Kalender extends AppCompatActivity {
         radio5 = (RadioButton)this.findViewById(R.id.radio5);
         radio6 = (RadioButton)this.findViewById(R.id.radio6);
         radio7 = (RadioButton)this.findViewById(R.id.radio7);
-
+        File myDir = getFilesDir();
+        Path =myDir.toString();
         final RadioGroup radioGroup = (RadioGroup) findViewById(R.id.rgroup);
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
         {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
 
+                Log.d("SOMETHING","Android Studio bug");
                 int id=checkedId;
-                if (id==2131427429){
+                Array2.clear();
+                Log.d("SOMETHING","Android Studio bug");
+                if (id==R.id.radio1){
+                    Log.d("SOMETHING","Android Studio bug");
                     readTextfile(4,2);
                 }
-                if (id==2131427430){
+                if (id == R.id.radio2){
                     readTextfile(5,2);
                 }
-                if (id==2131427431){
+                if (id==R.id.radio3){
                     readTextfile(6,2);
                 }
-                if (id==2131427432){
+                if (id==R.id.radio4){
                     readTextfile(7,2);
                 }
-                if (id==2131427433){
+                if (id==R.id.radio5){
                     readTextfile(8,2);
                 }
-                if (id==2131427434){
+                if (id==R.id.radio6){
                     readTextfile(9,2);
                 }
-                if (id==2131427435){
+                if (id==R.id.radio7){
                     readTextfile(10,2);
                 }
                 arrayAdapter2.notifyDataSetChanged();
@@ -86,8 +91,12 @@ public class Kalender extends AppCompatActivity {
         list2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> myAdapter, View myView, int myItemInt, long mylng) {
                 String selectedFromList =(String) (list2.getItemAtPosition(myItemInt));
-                Array2.add(selectedFromList);
-                arrayAdapter2.notifyDataSetChanged();
+                if (Array2.toString().contains(selectedFromList)) {
+
+                }else {
+                    Array2.add(selectedFromList);
+                    arrayAdapter2.notifyDataSetChanged();
+                }
             }
         });
         list3.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -147,7 +156,7 @@ public class Kalender extends AppCompatActivity {
             file = "Sonntag.txt";
         }
         BufferedReader buf = null;
-        logFile = new File(Environment.getExternalStorageDirectory()+"/Download/",file);
+        logFile = new File(Path,file);
         if (!logFile.exists()) {
             try {
                 Log.d("SOMETHING","File existiert aus merkwürdigen Gründen nicht");
@@ -166,7 +175,11 @@ public class Kalender extends AppCompatActivity {
                     Array1.add(x);
                 }
                 if(array ==2) {
-                    Array2.add(x);
+                    if (Array2.toString().contains(x)) {
+                        // true
+                    }else {
+                        Array2.add(x);
+                    }
                 }
                 x = r.readLine();
             }
@@ -177,7 +190,7 @@ public class Kalender extends AppCompatActivity {
     }
     public void addTextToFile(int i,String text) throws IOException {
         int vorhanden = 0;
-        //Irgendwas funktioniert hier noch nicht // Erledigt
+        //Irgendwas funktioniert hier noch nicht
         File logFile;
         String file ="";
         if (i ==1){
@@ -202,7 +215,7 @@ public class Kalender extends AppCompatActivity {
             file = "Sonntag.txt";
         }
         Log.d("SOMETHING","KA: "+ Environment.getExternalStorageState());
-        logFile = new File(Environment.getExternalStorageDirectory()+"/Download/",file);
+        logFile = new File(Path,file);
         if (!logFile.exists()) {
             try {
                 Log.d("SOMETHING","File exisitert nicht");
@@ -212,7 +225,7 @@ public class Kalender extends AppCompatActivity {
                 e.printStackTrace();
             }
         }else{
-            logFile.delete();
+            //logFile.delete();
             logFile.createNewFile();
         }
         //testet ob schon vorhanden
@@ -274,12 +287,14 @@ public class Kalender extends AppCompatActivity {
         if (radio7.isChecked()){
             wert=7;
         }
+
         Toast.makeText(getApplicationContext(), ""+list3.getCount(), Toast.LENGTH_LONG).show();
-        while (list3.getCount()>0){
+        while (list3.getCount()>i){
+            Log.d("SOMETHING","Wird gespeichert: "+list3.getAdapter().getItem(i).toString());
             try {
-            addTextToFile(wert,Array2.get(i).toString());
+            addTextToFile(wert,list3.getAdapter().getItem(i).toString());
             i++;
-                Log.d("SOMETHING","aktuell:"+i++ +"noch: "+ list3.getCount());
+                Log.d("SOMETHING","aktuell:"+i +"noch: "+ list3.getCount());
             }
             catch (Exception e){
 

@@ -1,60 +1,53 @@
 package com.example.denni.hsnrfitnessapp;
 
-import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.icu.text.SimpleDateFormat;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Denni on 15.02.2017.
  */
 
-public class MainActivity extends AppCompatActivity {
-    public EditText Plan;
-    public TextView Datum;
+public class MainActivity extends AppCompatActivity implements Adapter.listener {
     String mydate;
-
+    String Path="";
+    RecyclerView rv;
+    ArrayList Array1;
+    List<FitnessElemente> fitnessElemente;
+    private Adapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
-
-        EditText Plan = (EditText)this.findViewById(R.id.editText2);
+        rv = (RecyclerView) this.findViewById(R.id.recyclerView);
         TextView Datum = (TextView)this.findViewById(R.id.textView7);
         mydate = java.text.DateFormat.getDateInstance().format(Calendar.getInstance().getTime());
-
         Datum.setText(mydate);
-        Plan.setFocusable(false);
-        Plan.setText("Kein Training für Heute geplant");
-        DatabaseHandler d = new DatabaseHandler(this);
-       // d.reset();
-        //d.addcoloum(mydate);
-        //d.add("Übungen",mydate,"Laufen",10);
+        File myDir = getFilesDir();
+        Path =myDir.toString();
+
+
         //d.get(mydate,3);
         //
         //resetfiles(); //nur zum test
@@ -72,9 +65,42 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         System.out.println("Ergebnis: "+readTextfile(1,1));
+        List();
+    }
+    private void List() {
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        rv.setLayoutManager(layoutManager);
+        Array1 = new ArrayList<String>();
+        getDay();
+        fitnessElemente = new ArrayList();
+        DatabaseHandler d = new DatabaseHandler(this);
+        for (int i = 0; Array1.size() >i; i++){
+            addtoList(Array1.get(i).toString(), d.getAWert(Array1.get(i).toString()),d.getHWert(Array1.get(i).toString()));
+
+    }
+
+        setadapter(fitnessElemente);
+    }
+    private void setadapter(List<FitnessElemente> fitnessElementes) {
+        adapter = new Adapter(fitnessElementes, this);
+        rv.setAdapter(adapter);
     }
 
 
+    public List<FitnessElemente> addtoList(String Name, int Wert1, int Wert2){
+
+        {
+            FitnessElemente fitnessElemente = new FitnessElemente();
+            //fitnessElemente.setObjectId(12);
+            fitnessElemente.setName(Name);
+            fitnessElemente.setAktuellerwert(Wert1);
+            fitnessElemente.setHöchstwert(Wert2);
+            this.fitnessElemente.add(fitnessElemente);
+        }
+        //Weiß nicht welche Daten in der Detailansicht benötigt werden
+
+        return fitnessElemente;
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -89,15 +115,18 @@ public class MainActivity extends AppCompatActivity {
         // ausgewählt wurde und geben eine Meldung aus
         int id = item.getItemId();
         if (id == R.id.Informationen) {
-            Toast.makeText(getApplicationContext(), "Code und Design: Dennis Maus   Dokumentation: Tanja Schneider", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Code und Design: Dennis Maus   Dokumentation und Organisation: Tanja Schneider", Toast.LENGTH_LONG).show();
 
             return true;
         }
         if (id == R.id.Hinzufügen) {
             Intent in = new Intent(MainActivity.this, Add.class);
-
             startActivity(in);
-
+            return true;
+        }
+        if (id == R.id.Statistiken) {
+            Intent in = new Intent(MainActivity.this, Statistik.class);
+            startActivity(in);
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -118,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
             file = "Übungen.txt";
         }
         Log.d("SOMETHING","KA: "+ Environment.getExternalStorageState());
-        logFile = new File(Environment.getExternalStorageDirectory()+"/Download/",file);
+        logFile = new File(Path,file);
         if (!logFile.exists()) {
             try {
                 Log.d("SOMETHING","File exisitert nicht");
@@ -176,9 +205,10 @@ public class MainActivity extends AppCompatActivity {
             file = "Übungen.txt";
         }
         BufferedReader buf = null;
-        logFile = new File(Environment.getExternalStorageDirectory()+"/Download/",file);
+        logFile = new File(Path,file);
         if (!logFile.exists()) {
             try {
+                logFile.createNewFile();
                 Log.d("SOMETHING","File existiert aus merkwürdigen Gründen nicht");
             } catch (Exception e) {
                 e.printStackTrace();
@@ -210,14 +240,17 @@ public class MainActivity extends AppCompatActivity {
         return ergebnis;
     }
 
-    public void resetfiles(){
+    public void resetfiles() throws Exception{
        File logFile = null;
-        logFile = new File(Environment.getExternalStorageDirectory(),"Ausdauer.txt");
+        logFile = new File(Path,"Ausdauer.txt");
         logFile.delete();
-        logFile = new File(Environment.getExternalStorageDirectory(),"Geräte.txt");
+        logFile.createNewFile();
+        logFile = new File(Path,"Geräte.txt");
         logFile.delete();
-        logFile = new File(Environment.getExternalStorageDirectory(),"Übungen.txt");
+        logFile.createNewFile();
+        logFile = new File(Path,"Übungen.txt");
         logFile.delete();
+        logFile.createNewFile();
     }
     public void starteintrag1(View v){
         Intent in = new Intent(MainActivity.this, Eintrag.class);
@@ -244,5 +277,115 @@ public class MainActivity extends AppCompatActivity {
         Intent in = new Intent(MainActivity.this, Kalender.class);
 
         startActivity(in);
+    }
+
+    public void getDay(){
+
+        Log.d("SOMETHING","getDay");
+        Calendar calendar = Calendar.getInstance();
+        int day = calendar.get(Calendar.DAY_OF_WEEK);
+        switch (day) {
+
+            case Calendar.MONDAY:
+                Log.d("SOMETHING", "Montag");
+                // Current day is Monday
+                readTextfile(4);
+            case Calendar.TUESDAY:
+                Log.d("SOMETHING", "Dienstag");
+                // etc.
+                readTextfile(5);
+            case Calendar.WEDNESDAY:
+                Log.d("SOMETHING", "Mittwoch");
+                // etc.
+                readTextfile(6);
+            case Calendar.THURSDAY:
+                Log.d("SOMETHING", "Donnerstag");
+                // etc.
+                readTextfile(7);
+            case Calendar.FRIDAY:
+                Log.d("SOMETHING", "Freitag");
+                // etc.
+                readTextfile(8);
+
+            case Calendar.SATURDAY:
+                Log.d("SOMETHING", "Samstag");
+                // etc.
+                readTextfile(9);
+            case Calendar.SUNDAY:
+                Log.d("SOMETHING", "Sonntag");
+                // Current day is Sunday
+                readTextfile(10);
+        }
+
+    }
+    public void readTextfile(int i){
+        File logFile;
+        String file ="";
+        String ergebnis ="Kein Ergebnis";
+        if (i ==1){
+            file = "Ausdauer.txt";
+        }
+        if (i ==2){
+            file = "Geräte.txt";
+        }
+        if (i ==3){
+            file = "Übungen.txt";
+        }
+        if (i ==4){
+            file = "Montag.txt";
+        }
+        if (i ==5){
+            file = "Dienstag.txt";
+        }
+        if (i ==6){
+            file = "Mittwoch.txt";
+        }
+        if (i ==7){
+            file = "Donnerstag.txt";
+        }
+        if (i ==8){
+            file = "Freitag.txt";
+        }
+        if (i ==9){
+            file = "Samstag.txt";
+        }
+        if (i ==10){
+            file = "Sonntag.txt";
+        }
+        BufferedReader buf = null;
+        logFile = new File(Path,file);
+        if (!logFile.exists()) {
+            try {
+                Log.d("SOMETHING","File existiert aus merkwürdigen Gründen nicht");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        BufferedReader r=null;
+        try {
+            r = new BufferedReader(new FileReader(logFile));
+            String x = r.readLine();
+            while (x!=null){
+                Log.d("SOMETHING","Durchlauft Schleife");
+                Log.d("SOMETHING","plan: "+x);
+
+
+
+                Array1.add(x);
+
+                Log.d("SOMETHING","plan array: "+Array1.toString());
+                x = r.readLine();
+            }
+            Log.d("SOMETHING","plan array size: "+Array1.size());
+
+            r.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void onListItemClick(int i) {
+
+
+
     }
 }
