@@ -87,7 +87,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 wert =  cursor.getInt(4);
-                Log.d("SOMETHING","Fucking Wert: "+wert);
+
             } while (cursor.moveToNext());
         }
         cursor.close();
@@ -106,7 +106,26 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 wert =  cursor.getInt(5);
-                Log.d("SOMETHING","Fucking Wert: "+wert);
+
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return wert;
+    }
+    public String getdate(String Name) {
+
+        final String TABLE_NAME = "Data";
+
+        String selectQuery = "SELECT * FROM Data where Name = '" +Name+"'";
+        SQLiteDatabase db  = this.getReadableDatabase();
+        Cursor cursor      = db.rawQuery(selectQuery, null);
+        String[] data      = null;
+        String wert="Datum";
+
+        if (cursor.moveToFirst()) {
+            do {
+                wert =  cursor.getString(2);
+
             } while (cursor.moveToNext());
         }
         cursor.close();
@@ -125,7 +144,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 wert =  cursor.getInt(3);
-                Log.d("SOMETHING","Fucking Wert: "+wert);
+
             } while (cursor.moveToNext());
         }
         cursor.close();

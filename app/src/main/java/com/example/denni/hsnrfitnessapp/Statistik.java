@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -26,6 +27,8 @@ public class Statistik extends AppCompatActivity {
     TextView t1;
     TextView t2;
     TextView t3;
+    TextView date;
+    ImageView image;
     ArrayAdapter<String> arrayAdapter;
     DatabaseHandler d;
     @Override
@@ -36,9 +39,11 @@ public class Statistik extends AppCompatActivity {
         radio2 = (RadioButton)this.findViewById(R.id.radio2);
         radio3 = (RadioButton)this.findViewById(R.id.radio3);
         list = (ListView)this.findViewById(R.id.list);
+        image = (ImageView) this.findViewById(R.id.imageView);
         t1 = (TextView)this.findViewById(R.id.textView1);
         t2 = (TextView)this.findViewById(R.id.textView2);
         t3 = (TextView)this.findViewById(R.id.textView3);
+        date = (TextView)this.findViewById(R.id.tv_date);
         Array1=new ArrayList<String>();
         File myDir = getFilesDir();
         Path =myDir.toString();
@@ -77,6 +82,16 @@ public class Statistik extends AppCompatActivity {
                 t1.setText(String.valueOf(d.getSWert(selectedFromList)));
                 t2.setText(String.valueOf(d.getHWert(selectedFromList)));
                 t3.setText(String.valueOf(d.getAWert(selectedFromList)));
+                date.setText(String.valueOf(d.getdate(selectedFromList)));
+                if (d.getAWert(selectedFromList)>d.getSWert(selectedFromList)){
+                    image.setImageResource(R.drawable.smileygruen);
+                }
+                if (d.getAWert(selectedFromList)<d.getSWert(selectedFromList)){
+                    image.setImageResource(R.drawable.smileyrot);
+                }
+                if (d.getAWert(selectedFromList)==d.getSWert(selectedFromList)){
+                    image.setImageResource(R.drawable.smileygelb);
+                }
             }
         });
     }

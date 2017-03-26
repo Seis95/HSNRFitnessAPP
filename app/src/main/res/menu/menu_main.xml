@@ -8,4 +8,6 @@
         android:id="@+id/Hinzufügen" />
     <item android:title="Informationen"
         android:id="@+id/Informationen" />
+    <item android:title="Reset"
+        android:id="@+id/Reset" />
 </menu>

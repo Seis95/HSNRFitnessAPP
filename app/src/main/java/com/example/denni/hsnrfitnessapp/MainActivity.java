@@ -47,10 +47,6 @@ public class MainActivity extends AppCompatActivity implements Adapter.listener 
         File myDir = getFilesDir();
         Path =myDir.toString();
 
-
-        //d.get(mydate,3);
-        //
-        //resetfiles(); //nur zum test
         try {
             addTextToFile(1,"Laufen");
             addTextToFile(1,"Schwimmen");
@@ -109,7 +105,7 @@ public class MainActivity extends AppCompatActivity implements Adapter.listener 
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item)  {
         // Wir prüfen, ob Menü-Element mit der ID "action_daten_aktualisieren"
         // ausgewählt wurde und geben eine Meldung aus
         int id = item.getItemId();
@@ -126,6 +122,31 @@ public class MainActivity extends AppCompatActivity implements Adapter.listener 
         if (id == R.id.Statistiken) {
             Intent in = new Intent(MainActivity.this, Statistik.class);
             startActivity(in);
+            return true;
+        }
+        if (id == R.id.Reset) {
+            try {
+                reset();
+                DatabaseHandler d = new DatabaseHandler(this);
+                d.reset();
+                try {
+                    addTextToFile(1,"Laufen");
+                    addTextToFile(1,"Schwimmen");
+                    addTextToFile(1,"Nordic Walking");
+                    addTextToFile(2,"Butterfly");
+                    addTextToFile(2,"Beinpresse");
+                    addTextToFile(2,"Crunch");
+                    addTextToFile(3,"Liegestützen");
+                    addTextToFile(3,"Sit-ups");
+                    addTextToFile(3,"Crunches");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                Intent in = new Intent(MainActivity.this, MainActivity.class);
+                startActivity(in);
+            }catch(Exception e){
+
+            }
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -239,7 +260,7 @@ public class MainActivity extends AppCompatActivity implements Adapter.listener 
         return ergebnis;
     }
 
-    public void resetfiles() throws Exception{
+    public void reset() throws Exception{
        File logFile = null;
         logFile = new File(Path,"Ausdauer.txt");
         logFile.delete();
@@ -250,6 +271,20 @@ public class MainActivity extends AppCompatActivity implements Adapter.listener 
         logFile = new File(Path,"Übungen.txt");
         logFile.delete();
         logFile.createNewFile();
+        logFile = new File(Path,"Montag.txt");
+        logFile.delete();
+        logFile = new File(Path,"Dienstag.txt");
+        logFile.delete();
+        logFile = new File(Path,"Mittwoch.txt");
+        logFile.delete();
+        logFile = new File(Path,"Donnerstag.txt");
+        logFile.delete();
+        logFile = new File(Path,"Freitag.txt");
+        logFile.delete();
+        logFile = new File(Path,"Samstag.txt");
+        logFile.delete();
+        logFile = new File(Path,"Sonntag.txt");
+        logFile.delete();
     }
     public void starteintrag1(View v){
         Intent in = new Intent(MainActivity.this, Eintrag.class);

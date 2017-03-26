@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -28,6 +29,7 @@ ListView list;
     ArrayList Array1;
     EditText iWert;
     String selectedFromList;
+
     int Wert;
     String Path="";
     @Override
@@ -37,6 +39,7 @@ ListView list;
         int wert = getIntent().getExtras().getInt("liste");
         list = (ListView)this.findViewById(R.id.listview1);
         iWert = (EditText)this.findViewById(R.id.editText);
+
         Array1 = new ArrayList<String>();
         File myDir = getFilesDir();
         Path =myDir.toString();

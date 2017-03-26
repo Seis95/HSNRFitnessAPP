@@ -1,5 +1,6 @@
 package com.example.denni.hsnrfitnessapp;
 
+import android.content.Intent;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -225,8 +226,8 @@ public class Kalender extends AppCompatActivity {
                 e.printStackTrace();
             }
         }else{
-            //logFile.delete();
-            logFile.createNewFile();
+
+
         }
         //testet ob schon vorhanden
         BufferedReader r=null;
@@ -287,9 +288,33 @@ public class Kalender extends AppCompatActivity {
         if (radio7.isChecked()){
             wert=7;
         }
-
-        Toast.makeText(getApplicationContext(), ""+list3.getCount(), Toast.LENGTH_LONG).show();
+        String file="";
+        if (wert ==1){
+            file = "Montag.txt";
+        }
+        if (wert ==2){
+            file = "Dienstag.txt";
+        }
+        if (wert==3){
+            file = "Mittwoch.txt";
+        }
+        if (wert ==4){
+            file = "Donnerstag.txt";
+        }
+        if (wert ==5){
+            file = "Freitag.txt";
+        }
+        if (wert ==6){
+            file = "Samstag.txt";
+        }
+        if (wert ==7){
+            file = "Sonntag.txt";
+        }
+        Toast.makeText(getApplicationContext(), "Gespeichert", Toast.LENGTH_LONG).show();
+        File logFile = new File(Path,file);
+        logFile.delete();
         while (list3.getCount()>i){
+
             Log.d("SOMETHING","Wird gespeichert: "+list3.getAdapter().getItem(i).toString());
             try {
             addTextToFile(wert,list3.getAdapter().getItem(i).toString());
@@ -300,5 +325,7 @@ public class Kalender extends AppCompatActivity {
 
             }
         }
+        Intent in = new Intent(Kalender.this, MainActivity.class);
+        startActivity(in);
     }
 }
