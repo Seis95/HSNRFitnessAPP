@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements Adapter.listener 
     }
 
 
-    public List<FitnessElemente> addtoList(String Name, int Wert1, int Wert2){
+    public List<FitnessElemente> addtoList(String Name, double Wert1, double Wert2){
 
         {
             FitnessElemente fitnessElemente = new FitnessElemente();
@@ -324,31 +324,37 @@ public class MainActivity extends AppCompatActivity implements Adapter.listener 
                 Log.d("SOMETHING", "Montag");
                 // Current day is Monday
                 readTextfile(4);
+                break;
             case Calendar.TUESDAY:
                 Log.d("SOMETHING", "Dienstag");
                 // etc.
                 readTextfile(5);
+                break;
             case Calendar.WEDNESDAY:
                 Log.d("SOMETHING", "Mittwoch");
                 // etc.
                 readTextfile(6);
+                break;
             case Calendar.THURSDAY:
                 Log.d("SOMETHING", "Donnerstag");
                 // etc.
                 readTextfile(7);
+                break;
             case Calendar.FRIDAY:
                 Log.d("SOMETHING", "Freitag");
                 // etc.
                 readTextfile(8);
-
+                break;
             case Calendar.SATURDAY:
                 Log.d("SOMETHING", "Samstag");
                 // etc.
                 readTextfile(9);
+                break;
             case Calendar.SUNDAY:
                 Log.d("SOMETHING", "Sonntag");
                 // Current day is Sunday
                 readTextfile(10);
+                break;
         }
 
     }

@@ -53,10 +53,11 @@ ListView list;
 
             }
         });
+        list.setItemChecked(0,true);
     }
     public void save(View v){
     Log.d("SOMETHING","Soll gespeichert werden: "+selectedFromList);
-        int wert=Integer.parseInt(iWert.getText().toString());
+        double wert=Double.parseDouble(iWert.getText().toString());
         String  mydate = java.text.DateFormat.getDateInstance().format(Calendar.getInstance().getTime());
         DatabaseHandler d = new DatabaseHandler(this);
         if (d.check(selectedFromList)==0){

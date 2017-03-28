@@ -3,28 +3,28 @@ package com.example.denni.hsnrfitnessapp;
 public class FitnessElemente {
 
 
-    int Höchstwert;
-    int Aktuellerwert;
-    int Startwert;
+    double Höchstwert;
+    double Aktuellerwert;
+    double Startwert;
     String Name;
 
 
-    public int getHöchstwert() {
+    public double getHöchstwert() {
         return Höchstwert;
     }
-    public int getAktuellerwert() {
+    public double getAktuellerwert() {
         return Aktuellerwert;
     }
-    public int getStartwert() {
+    public double getStartwert() {
         return Startwert;
     }
-    public void setAktuellerwert(int wert) {
+    public void setAktuellerwert(double wert) {
         Aktuellerwert= wert;
     }
-    public void setHöchstwert(int wert) {
+    public void setHöchstwert(double wert) {
         Höchstwert= wert;
     }
-    public void setStartwert(int wert) {
+    public void setStartwert(double wert) {
         Startwert= wert;
     }
 

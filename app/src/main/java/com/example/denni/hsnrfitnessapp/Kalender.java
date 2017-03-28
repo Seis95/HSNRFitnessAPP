@@ -50,6 +50,7 @@ public class Kalender extends AppCompatActivity {
         File myDir = getFilesDir();
         Path =myDir.toString();
         final RadioGroup radioGroup = (RadioGroup) findViewById(R.id.rgroup);
+
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
         {
             @Override
@@ -119,7 +120,8 @@ public class Kalender extends AppCompatActivity {
                 (this, android.R.layout.simple_list_item_1, Array2);
         arrayAdapter2.notifyDataSetChanged();
         list3.setAdapter(arrayAdapter2);
-
+        readTextfile(4,2);
+        arrayAdapter2.notifyDataSetChanged();
 
     }
     public void readTextfile(int i,int array){

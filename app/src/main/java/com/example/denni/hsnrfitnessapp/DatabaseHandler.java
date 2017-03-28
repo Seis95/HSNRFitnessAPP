@@ -25,7 +25,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 
 
-    private static final String CREATE_Table1 = "CREATE TABLE Data (ID INTEGER PRIMARY KEY,Name TEXT,Datum Text,Startwert INTEGER, Aktuellerwert INTEGER, Höchstwert INTEGER );";
+    private static final String CREATE_Table1 = "CREATE TABLE Data (ID INTEGER PRIMARY KEY,Name TEXT,Datum Text,Startwert REAL, Aktuellerwert REAL, Höchstwert REAL );";
 
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -56,7 +56,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void add(String table,String datum,String name,int gewicht,int gewicht2,int gewicht3) {
+    public void add(String table,String datum,String name,double gewicht,double gewicht2,double gewicht3) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         ContentValues values = new ContentValues();
@@ -74,7 +74,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         //going to pause/stop.
         //db.close();
     }
-    public int getAWert(String Name) {
+    public double getAWert(String Name) {
 
         final String TABLE_NAME = "Data";
 
@@ -82,18 +82,18 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db  = this.getReadableDatabase();
         Cursor cursor      = db.rawQuery(selectQuery, null);
         String[] data      = null;
-        int wert=0;
+        Double wert=0.0;
 
         if (cursor.moveToFirst()) {
             do {
-                wert =  cursor.getInt(4);
+                wert =  cursor.getDouble(4);
 
             } while (cursor.moveToNext());
         }
         cursor.close();
         return wert;
     }
-    public int getHWert(String Name) {
+    public double getHWert(String Name) {
 
         final String TABLE_NAME = "Data";
 
@@ -101,11 +101,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db  = this.getReadableDatabase();
         Cursor cursor      = db.rawQuery(selectQuery, null);
         String[] data      = null;
-        int wert=0;
+        Double wert=0.0;
 
         if (cursor.moveToFirst()) {
             do {
-                wert =  cursor.getInt(5);
+                wert =  cursor.getDouble(5);
 
             } while (cursor.moveToNext());
         }
@@ -131,7 +131,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         cursor.close();
         return wert;
     }
-    public int getSWert(String Name) {
+    public double getSWert(String Name) {
 
         final String TABLE_NAME = "Data";
 
@@ -139,11 +139,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db  = this.getReadableDatabase();
         Cursor cursor      = db.rawQuery(selectQuery, null);
         String[] data      = null;
-        int wert=0;
+        Double wert=0.0;
 
         if (cursor.moveToFirst()) {
             do {
-                wert =  cursor.getInt(3);
+                wert =  cursor.getDouble(3);
 
             } while (cursor.moveToNext());
         }
@@ -156,13 +156,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         Cursor cursor      = db.rawQuery(selectQuery, null);
         return cursor.getCount();
     }
-    public void updateA(String Name, int Wert){
+    public void updateA(String Name, double Wert){
         SQLiteDatabase db = this.getReadableDatabase();
         ContentValues args = new ContentValues();
         args.put("Aktuellerwert", Wert);
         db.update("Data", args, "Name" + "= '" + Name+"'", null);
     }
-    public void updateH(String Name, int Wert){
+    public void updateH(String Name, double Wert){
         SQLiteDatabase db = this.getReadableDatabase();
         ContentValues args = new ContentValues();
         args.put("Höchstwert", Wert);
