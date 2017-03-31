@@ -33,9 +33,9 @@
         android:layout_marginTop="14dp"
         android:ems="10"
         android:hint="Wert eingeben"
-        android:textColor="@android:color/holo_red_dark"
+        android:textColor="@android:color/white"
         android:inputType="numberDecimal"
-        android:textColorHint="@android:color/holo_red_dark" />
+        android:textColorHint="@android:color/white" />
 
     <Button
         android:id="@+id/Speichern"
