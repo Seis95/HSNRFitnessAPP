@@ -73,7 +73,7 @@ ListView list;
             }
         }
         Intent in = new Intent(Eintrag.this, MainActivity.class);
-        
+        in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(in);
 
     }

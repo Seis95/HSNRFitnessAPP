@@ -37,11 +37,12 @@ public class MainActivity extends AppCompatActivity implements Adapter.listener 
     ArrayList Array1;
     List<FitnessElemente> fitnessElementes;
     private Adapter adapter;
-    boolean backpressed = false;
+   boolean doubleBackToExitPressedOnce = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
         rv = (RecyclerView) this.findViewById(R.id.recyclerView);
         TextView Datum = (TextView)this.findViewById(R.id.textView7);
@@ -68,24 +69,25 @@ public class MainActivity extends AppCompatActivity implements Adapter.listener 
     }
 
     @Override
-    public void onBackPressed() {
-        if (backpressed) {
-            finish();
-            System.exit(0);
-            super.onBackPressed();
-            return;
-        }
-        this.backpressed = true;
-        Toast.makeText(this, "Erneut drücken zum Beenden", Toast.LENGTH_SHORT).show();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                backpressed =false;
-
-            }
-        }, 2000);
-
+    protected void onResume() {
+        super.onResume();
+        // .... other stuff in my onResume ....
+        this.doubleBackToExitPressedOnce = false;
     }
+
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+
+            android.os.Process.killProcess(android.os.Process.myPid());
+            System.exit(1);
+            //super.onBackPressed();
+            //return;
+        }
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "test", Toast.LENGTH_SHORT).show();
+    }
+
 
     private void List() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
