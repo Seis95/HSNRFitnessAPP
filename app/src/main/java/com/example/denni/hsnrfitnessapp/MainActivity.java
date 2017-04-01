@@ -1,8 +1,10 @@
 package com.example.denni.hsnrfitnessapp;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Environment;
 import android.os.Handler;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -71,7 +73,6 @@ public class MainActivity extends AppCompatActivity implements Adapter.listener 
     @Override
     protected void onResume() {
         super.onResume();
-        // .... other stuff in my onResume ....
         this.doubleBackToExitPressedOnce = false;
     }
 
@@ -85,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements Adapter.listener 
             //return;
         }
         this.doubleBackToExitPressedOnce = true;
-        Toast.makeText(this, "test", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Beim nächsten Zurück wird die App beendet", Toast.LENGTH_SHORT).show();
     }
 
 
@@ -150,29 +151,50 @@ public class MainActivity extends AppCompatActivity implements Adapter.listener 
             startActivity(in);
             return true;
         }
+        if (id == R.id.Update) {
+            Intent in = new Intent(MainActivity.this, MainActivity.class);
+            in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(in);
+            return true;
+        }
         if (id == R.id.Reset) {
-            try {
-                reset();
-                DatabaseHandler d = new DatabaseHandler(this);
-                d.reset();
-                try {
-                    addTextToFile(1,"Laufen");
-                    addTextToFile(1,"Schwimmen");
-                    addTextToFile(1,"Nordic Walking");
-                    addTextToFile(2,"Butterfly");
-                    addTextToFile(2,"Beinpresse");
-                    addTextToFile(2,"Crunch");
-                    addTextToFile(3,"Liegestützen");
-                    addTextToFile(3,"Sit-ups");
-                    addTextToFile(3,"Crunches");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                Intent in = new Intent(MainActivity.this, MainActivity.class);
-                startActivity(in);
-            }catch(Exception e){
+            final DatabaseHandler d = new DatabaseHandler(this);
+            new AlertDialog.Builder(this)
+                    .setTitle("Zurücksetzen")
+                    .setMessage("Bist du sicher? Alle Daten werden gelöscht")
+                    .setPositiveButton("Ja", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            try {
+                                reset();
+                                d.reset();
+                                try {
+                                    addTextToFile(1,"Laufen");
+                                    addTextToFile(1,"Schwimmen");
+                                    addTextToFile(1,"Nordic Walking");
+                                    addTextToFile(2,"Butterfly");
+                                    addTextToFile(2,"Beinpresse");
+                                    addTextToFile(2,"Crunch");
+                                    addTextToFile(3,"Liegestützen");
+                                    addTextToFile(3,"Sit-ups");
+                                    addTextToFile(3,"Crunches");
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                                Intent in = new Intent(MainActivity.this, MainActivity.class);
+                                startActivity(in);
+                            }catch(Exception e){
 
-            }
+                            }
+                        }
+                    })
+                    .setNegativeButton("Nein", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // do nothing
+                        }
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
+
             return true;
         }
         return super.onOptionsItemSelected(item);

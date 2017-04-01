@@ -10,4 +10,6 @@
         android:id="@+id/Informationen" />
     <item android:title="Reset"
         android:id="@+id/Reset" />
+    <item android:title="Update"
+        android:id="@+id/Update" />
 </menu>

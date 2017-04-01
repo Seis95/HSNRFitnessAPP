@@ -328,6 +328,7 @@ public class Kalender extends AppCompatActivity {
             }
         }
         Intent in = new Intent(Kalender.this, MainActivity.class);
+        in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(in);
     }
 }
