@@ -2,6 +2,7 @@ package com.example.denni.hsnrfitnessapp;
 
 import android.content.Intent;
 import android.os.Environment;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -36,6 +37,8 @@ public class MainActivity extends AppCompatActivity implements Adapter.listener 
     ArrayList Array1;
     List<FitnessElemente> fitnessElementes;
     private Adapter adapter;
+    boolean backpressed = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +66,27 @@ public class MainActivity extends AppCompatActivity implements Adapter.listener 
         System.out.println("Ergebnis: "+readTextfile(1,1));
         List();
     }
+
+    @Override
+    public void onBackPressed() {
+        if (backpressed) {
+            finish();
+            System.exit(0);
+            super.onBackPressed();
+            return;
+        }
+        this.backpressed = true;
+        Toast.makeText(this, "Erneut drücken zum Beenden", Toast.LENGTH_SHORT).show();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                backpressed =false;
+
+            }
+        }, 2000);
+
+    }
+
     private void List() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         rv.setLayoutManager(layoutManager);
@@ -322,37 +346,30 @@ public class MainActivity extends AppCompatActivity implements Adapter.listener 
 
             case Calendar.MONDAY:
                 Log.d("SOMETHING", "Montag");
-                // Current day is Monday
                 readTextfile(4);
                 break;
             case Calendar.TUESDAY:
                 Log.d("SOMETHING", "Dienstag");
-                // etc.
                 readTextfile(5);
                 break;
             case Calendar.WEDNESDAY:
                 Log.d("SOMETHING", "Mittwoch");
-                // etc.
                 readTextfile(6);
                 break;
             case Calendar.THURSDAY:
                 Log.d("SOMETHING", "Donnerstag");
-                // etc.
                 readTextfile(7);
                 break;
             case Calendar.FRIDAY:
                 Log.d("SOMETHING", "Freitag");
-                // etc.
                 readTextfile(8);
                 break;
             case Calendar.SATURDAY:
                 Log.d("SOMETHING", "Samstag");
-                // etc.
                 readTextfile(9);
                 break;
             case Calendar.SUNDAY:
                 Log.d("SOMETHING", "Sonntag");
-                // Current day is Sunday
                 readTextfile(10);
                 break;
         }

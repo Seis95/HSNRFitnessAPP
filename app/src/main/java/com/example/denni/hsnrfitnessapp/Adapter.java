@@ -82,8 +82,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.Holder> {
         void bind(FitnessElemente fitnessElemente) {
             Log.d("ADAPTER","JA ER MACHT WAS");
             tv_name.setText(fitnessElemente.getName());
-            tv_current.setText(String.valueOf(+fitnessElemente.getAktuellerwert()));
-            tv_höchst.setText(String.valueOf(+fitnessElemente.getHöchstwert()));
+            tv_current.setText(String.valueOf("A: "+fitnessElemente.getAktuellerwert()));
+            tv_höchst.setText(String.valueOf("H: "+fitnessElemente.getHöchstwert()));
 
         }
 
