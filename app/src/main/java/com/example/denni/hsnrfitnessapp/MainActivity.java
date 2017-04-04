@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements Adapter.listener 
             addTextToFile(2,"Butterfly");
             addTextToFile(2,"Beinpresse");
             addTextToFile(2,"Crunch");
-            addTextToFile(3,"Liegestützen");
+            addTextToFile(3,"Liegestütze");
             addTextToFile(3,"Sit-ups");
             addTextToFile(3,"Crunches");
         } catch (IOException e) {
@@ -174,7 +174,7 @@ public class MainActivity extends AppCompatActivity implements Adapter.listener 
                                     addTextToFile(2,"Butterfly");
                                     addTextToFile(2,"Beinpresse");
                                     addTextToFile(2,"Crunch");
-                                    addTextToFile(3,"Liegestützen");
+                                    addTextToFile(3,"Liegestütze");
                                     addTextToFile(3,"Sit-ups");
                                     addTextToFile(3,"Crunches");
                                 } catch (IOException e) {
